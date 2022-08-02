@@ -9,3 +9,20 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Eligon.Studies.StudyChapter
+alias Eligon.Studies.StudyLesson
+alias Eligon.Repo
+
+chapters = [
+  %StudyChapter{index: 1, title: "Elixir基礎"}
+]
+
+lessons = [
+  %StudyLesson{chapter_id: 1, index: 1, lesson: "基本", link: "https://elixirschool.com/ja/lessons/basics/basics"},
+  %StudyLesson{chapter_id: 1, index: 2, lesson: "コレクション", link: "https://elixirschool.com/ja/lessons/basics/collections"},
+  %StudyLesson{chapter_id: 1, index: 3, lesson: "Enum", link: "https://elixirschool.com/ja/lessons/basics/enum"}
+]
+
+Enum.each(chapters, &(Repo.insert(&1)))
+Enum.each(lessons, &(Repo.insert(&1)))

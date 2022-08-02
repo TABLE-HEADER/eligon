@@ -10,6 +10,6 @@ defmodule Eligon.Studies.StudyAdvance do
     timestamps()
 
     belongs_to(:user, Eligon.Users.User)
-    belongs_to(:study_lesson, Eligon.Studies.StudyLesson)
+    belongs_to(:lesson, Eligon.Studies.StudyLesson)
   end
 end

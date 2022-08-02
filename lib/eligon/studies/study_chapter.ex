@@ -5,6 +5,7 @@ defmodule Eligon.Studies.StudyChapter do
   #@foreign_key_type :binary_id
 
   schema "study_chapters" do
-    field(:title, :string)
+    field :index, :integer
+    field :title, :string
   end
 end
