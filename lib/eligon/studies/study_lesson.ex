@@ -5,11 +5,13 @@ defmodule Eligon.Studies.StudyLesson do
   #@foreign_key_type :binary_id
 
   schema "study_lessons" do
+    field :index, :integer
     field :lesson, :string
+    field :description, :string
     field :link, :string
 
     timestamps()
 
-    belongs_to(:study_chapter, Eligon.Studies.StudyChapter)
+    belongs_to(:chapter, Eligon.Studies.StudyChapter)
   end
 end

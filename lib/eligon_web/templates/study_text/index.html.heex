@@ -1,0 +1,21 @@
+<h1>学習</h1>
+
+<%= for {chapter, lessons} <- @textbook do %>
+    <h2><%= chapter.title %></h2>
+    <table>
+        <tr>
+            <th>講座番号</th>
+            <th>レッスン名</th>
+            <th>説明</th>
+            <th>完了</th>
+        </tr>
+        <%= for l <- lessons do %>
+            <tr>
+                <td><%= "#{chapter.index}-#{l.index}" %></td>
+                <td><%= link(l.lesson, to: URI.parse(l.link)) %></td>
+                <td><%= l.description %></td>
+                <td></td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>
