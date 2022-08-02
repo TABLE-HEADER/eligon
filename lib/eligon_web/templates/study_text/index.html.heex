@@ -14,7 +14,12 @@
                 <td><%= "#{chapter.index}-#{l.index}" %></td>
                 <td><%= link(l.lesson, to: URI.parse(l.link)) %></td>
                 <td><%= l.description %></td>
-                <td></td>
+                <td>
+                    <.form let={f} for={@changeset} phx-change="check">
+                        <%= checkbox f, :is_read %>
+                        <%= hidden_input f, :lesson_id, value: l.id %>
+                    </.form>
+                </td>
             </tr>
         <% end %>
     </table>

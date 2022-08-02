@@ -1,6 +1,6 @@
 defmodule Eligon.Studies.StudyAdvance do
   use Ecto.Schema
-
+  import Ecto.Changeset
 
   schema "study_advances" do
     # filed :user_id, references(:users, type: :binary_id, on_delete: :delete_all)
@@ -11,5 +11,14 @@ defmodule Eligon.Studies.StudyAdvance do
 
     belongs_to(:user, Eligon.Users.User)
     belongs_to(:lesson, Eligon.Studies.StudyLesson)
+  end
+
+  def build_changeset do
+    cast(%__MODULE__{}, %{}, [])
+  end
+
+  def changeset(advance, attrs \\ %{}) do
+    advance
+    |> cast(attrs, [:is_read, :user, :lesson])
   end
 end
