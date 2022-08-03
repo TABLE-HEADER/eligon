@@ -19,6 +19,9 @@ defmodule EligonWeb.UserRegistrationController do
             &Routes.user_confirmation_url(conn, :edit, &1)
           )
 
+        user_id = user.id
+        Eligon.Studies.insert_advances_at_registration(user_id)
+
         conn
         |> put_flash(:info, "User created successfully.")
         |> UserAuth.log_in_user(user)
