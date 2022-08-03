@@ -1,8 +1,8 @@
-defmodule Eligon.Meeting.Board do
+defmodule Eligon.Chats.Chat do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "boards" do
+  schema "chats" do
     field :inner_text, :string
 
     belongs_to :user, Eligon.Users.User

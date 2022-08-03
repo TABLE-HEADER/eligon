@@ -84,6 +84,7 @@ defmodule EligonWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     live "/study", StudyTextLive, :index
+    live "/chat", RoomChatLive, :index
   end
 
   scope "/", EligonWeb do
