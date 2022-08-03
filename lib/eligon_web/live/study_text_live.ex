@@ -13,7 +13,9 @@ defmodule EligonWeb.StudyTextLive do
   end
 
   def mount(_params, _seesion, socket) do
+    IO.inspect(Map.from_struct(socket))
     textbook = Studies.get_textbook()
+    advances = Studies.get_all_advances_by_userid(4)
 
     socket =
       socket
@@ -21,8 +23,7 @@ defmodule EligonWeb.StudyTextLive do
         |> assign(:template, "index.html")
         |> assign(:textbook, textbook)
         |> assign(:changeset, Eligon.Studies.StudyAdvance.build_changeset())
-
-    IO.inspect(Map.from_struct(socket))
+        |> assign(:advances, advances)
 
     {:ok, socket}
   end

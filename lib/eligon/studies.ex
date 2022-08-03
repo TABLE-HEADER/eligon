@@ -29,6 +29,11 @@ defmodule Eligon.Studies do
       |> StudyAdvance.changeset(%{user_id: user_id, lesson_id: l.id, is_read: false})
       |> Repo.insert()
     end
+  end
 
+  def get_all_advances_by_userid(user_id) do
+    query = from(a in StudyAdvance, where: a.user_id == ^user_id)
+
+    Repo.all(query)
   end
 end
