@@ -75,16 +75,15 @@ defmodule Eligon.Users do
 
   """
 
-  ##消すかもしれない
-  # def register_user(attrs \\ %{}) do
-  #   %User{}
-  #   |> User.registration_changeset(attrs)
-  #   |> Repo.insert()
-  # end
+  def register_user(attrs \\ %{}) do
+    %User{}
+    |> User.registration_changeset(attrs)
+    |> Repo.insert()
+  end
 
-  # def cnang_registration(%{} = user, params) do
-  #   User.registration_changeset(user, params)
-  # end
+  def cnang_registration(%{} = user, params) do
+    User.registration_changeset(user, params)
+  end
 
 
 

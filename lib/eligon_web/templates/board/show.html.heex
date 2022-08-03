@@ -1,18 +1,20 @@
-<h1>Show Board</h1>
+<%# <h1>Show Board</h1>
 
 <ul>
 
   <li>
     <strong>Name:</strong>
     <%= @board.name %>
-  </li>
+  <%# </li>
 
   <li>
     <strong>Description:</strong>
     <%= @board.description %>
-  </li>
+  <%# </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.board_path(@conn, :edit, @board) %></span> |
-<span><%= link "Back", to: Routes.board_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.board_path(@conn, :edit, @board) %>
+<%# </span> | %>
+<%# <span><%= link "Back", to: Routes.board_path(@conn, :index) %>
+<%# </span> %> 
