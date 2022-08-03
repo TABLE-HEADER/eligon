@@ -21,6 +21,10 @@ defmodule EligonWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resouces "/boards", BoardController
+
+    # resouces "/user", UserController, only:[:new, :create]
+
   end
 
   # Other scopes may use custom stacks.
