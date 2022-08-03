@@ -2,6 +2,7 @@ defmodule Eligon.Studies do
   alias Eligon.Repo
   alias Eligon.Studies.StudyChapter
   alias Eligon.Studies.StudyLesson
+  alias Eligon.Studies.StudyAdvance
   import Ecto.Query
 
   @doc """
@@ -16,5 +17,18 @@ defmodule Eligon.Studies do
       lessons = Repo.all(query_lesson)
       {c, lessons}
     end
+  end
+
+  def insert_advances_at_registration(user_id) do
+
+    query = from(StudyLesson)
+    lessons = Repo.all(query)
+
+    for l <- lessons do
+      %StudyAdvance{}
+      |> StudyAdvance.changeset(%{user_id: user_id, lesson_id: l.id, is_read: false})
+      |> Repo.insert()
+    end
+
   end
 end
