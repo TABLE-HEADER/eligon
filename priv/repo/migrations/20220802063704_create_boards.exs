@@ -3,13 +3,10 @@ defmodule Eligon.Repo.Migrations.CreateBoards do
 
   def change do
     create table(:boards) do
-      add :name, :string
-      add :description, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :inner_text, :string
+      add :user_id, references(:users, type: :integer, on_delete: :nothing)
 
       timestamps()
     end
-
-    create index(:boards, [:user_id])
   end
 end
