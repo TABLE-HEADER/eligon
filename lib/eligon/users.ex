@@ -74,11 +74,19 @@ defmodule Eligon.Users do
       {:error, %Ecto.Changeset{}}
 
   """
-  def register_user(attrs) do
-    %User{}
-    |> User.registration_changeset(attrs)
-    |> Repo.insert()
-  end
+
+  ##消すかもしれない
+  # def register_user(attrs \\ %{}) do
+  #   %User{}
+  #   |> User.registration_changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
+  # def cnang_registration(%{} = user, params) do
+  #   User.registration_changeset(user, params)
+  # end
+
+
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
