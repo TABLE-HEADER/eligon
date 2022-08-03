@@ -83,7 +83,7 @@ defmodule EligonWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    get "/study", StudyTextController, :index
+    live "/study", StudyTextLive, :index
   end
 
   scope "/", EligonWeb do
@@ -92,7 +92,6 @@ defmodule EligonWeb.Router do
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
   end
 end
