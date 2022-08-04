@@ -12,7 +12,7 @@
         <%= for l <- lessons do %>
             <tr>
                 <td><%= "#{chapter.index}-#{l.index}" %></td>
-                <td><%= link(l.lesson, to: URI.parse(l.link)) %></td>
+                <td><%= link(l.lesson, to: URI.parse(l.link), target: "_blank") %></td>
                 <td><%= l.description %></td>
                 <td>
                     <!--
