@@ -10,9 +10,13 @@ defmodule Eligon.Chats.Chat do
     timestamps()
   end
 
-  def changeset(board, attrs) do
-    board
-    |> cast(attrs, [:inner_text])
-    |> validate_required([:inner_text])
+  def build_changeset do
+    cast(%__MODULE__{}, %{}, [])
+  end
+
+  def changeset(chats, attrs) do
+    chats
+    |> cast(attrs, [:inner_text, :user_id])
+    |> validate_required([:inner_text, :user_id])
   end
 end

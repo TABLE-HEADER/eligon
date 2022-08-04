@@ -1,1 +1,35 @@
-<h2>test</h2>
+<h1 class="text-4xl">test</h1>
+
+<table>
+    <% chat_tuple = Enum.with_index(@chats, 1) %>
+    <%= for {chat, num} <- chat_tuple do %>
+        <tr>
+            <td><%= num %>：</td>
+            <td><%= chat.nickname %></td>
+            <td><%= format_date(chat.inserted_at) %></td>
+            <td>
+                <%= if chat.user_id == @user_id do%>
+                    <span phx-click="edit" phx-value-id={chat.id}>編集</span>
+                    | <span phx-click="delete" phx-value-id={chat.id}>削除</span>
+                <% end %>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><%= add_lines(chat.inner_text) %></td>
+        </tr>
+    <% end %>
+</table>
+<br>
+<h2 class="text-2xl">
+    <%= if @edit_text.id == 0 do %>
+        新規書き込み
+    <% else %>
+        書き込み(番号：<%= @edit_text.id %>)を編集
+        ｜<span phx-click="edit_cancel" phx-value-id={@edit_text.id}>[解除]</span>
+    <% end %>
+</h2>
+<.form let={f} for={@changeset} phx-submit="new_text">
+    <%= textarea f, :inner_text %>
+    <%= #@edit_text.text %>
+    <button type="submit">送信</button>
+</.form>
