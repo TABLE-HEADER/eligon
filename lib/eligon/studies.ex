@@ -31,9 +31,31 @@ defmodule Eligon.Studies do
     end
   end
 
+  @doc """
+  user_idに応じて、すべてのadvances(読了チェックのテーブルの値)を
+  持ってきます
+  """
   def get_all_advances_by_userid(user_id) do
     query = from(a in StudyAdvance, where: a.user_id == ^user_id)
 
     Repo.all(query)
   end
+
+  @doc """
+  user_idとlesson_idから該当advance(一つしかないはず)を持ってきます。
+  その後、flagの値で、is_readを書き換え、updateします。
+  """
+  def get_advance_and_update(user_id, lesson_id, flag) do
+    query = from(a in StudyAdvance,
+            where: a.user_id == ^user_id and a.lesson_id == ^lesson_id)
+
+    [advance] = Repo.all(query)
+
+    changeset_advance = StudyAdvance.changeset(advance, %{:is_read => flag})
+
+    IO.inspect(changeset_advance)
+    IO.inspect("updateできました")
+    Repo.update(changeset_advance)
+  end
+
 end

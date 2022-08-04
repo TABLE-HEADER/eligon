@@ -15,9 +15,16 @@
                 <td><%= link(l.lesson, to: URI.parse(l.link)) %></td>
                 <td><%= l.description %></td>
                 <td>
+                    <!--
+                    上のfor文では各lessonに対して一つずつ回している。
+                    その入ってきたlessonのidにマッチする@advancesの中のlesson_idだけをEnum.filterで取ってきている。
+                    あとはその取ってきたadvanceのis_readをそのままcheckedオプションに追加する。
+                    -->
                     <.form let={f} for={@changeset} phx-change="check">
-                        <%= checkbox f, :is_read %>
+                        <% [lesson_id_advance] = Enum.filter(@advances, fn advance -> advance.lesson_id == l.id end) %>
+                        <%= checkbox f, :is_read, checked: lesson_id_advance.is_read %>
                         <%= hidden_input f, :lesson_id, value: l.id %>
+                        <%= hidden_input f, :user_id, value: lesson_id_advance.user_id %>
                     </.form>
                 </td>
             </tr>
