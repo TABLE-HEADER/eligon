@@ -81,9 +81,9 @@ defmodule Eligon.Users do
     |> Repo.insert()
   end
 
-  def cnang_registration(%{} = user, params) do
-    User.registration_changeset(user, params)
-  end
+  # def cnang_registration(%{} = user, params) do
+  #   User.registration_changeset(user, params)
+  # end
 
 
 
