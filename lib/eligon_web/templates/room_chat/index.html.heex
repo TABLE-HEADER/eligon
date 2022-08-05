@@ -1,49 +1,60 @@
-<h1 class="text-3xl">チャット</h1>
+<div class="container mx-auto my-10">
 
-<.form let={f} for={@changeset} phx-submit="search">
-    <%= search_input f, :search_text, placeholder: "検索ワードを入力" %>
-    <button type="submit">検索</button>
-</.form>
-<button phx-click="show_all">全件表示</button>
-<br>
+    <h1 class="text-5xl m-4"><span class="font-bold text-blue-400 ">Eligon</span>Chat</h1>
 
-<%= if @mode == :show_all do %>
-    全件表示(<%= length(@chats) %>件)
-<% else %>
-    "<%= @search_text %>"の検索結果(<%= length(@chats) %>件)
-<% end %>
-<br>
+    <.form let={f} for={@changeset} phx-submit="search" class="m-5">
+        <div class="bg-stone-900 border-5 p-5 rounded-md">
+            <%= search_input f, :search_text, placeholder: "検索ワードを入力" %>
+            <button type="submit" class="ml-3 border-solid border px-3 py-0.5 rounded-md hover:text-white text-current">検索</button>
+        </div>
+    </.form>
+    <div class="ml-5">
+        <button phx-click="show_all">全件表示</button>
+        <br>
 
-<table>
-    <% chat_tuple = Enum.with_index(@chats, 1) %>
-    <%= for {chat, num} <- chat_tuple do %>
-        <tr>
-            <td><%= num %>：</td>
-            <td><%= chat.nickname %>&nbsp;</td>
-            <td><%= format_date(chat.inserted_at) %></td>
-            <td>
-                <%= if chat.user_id == @user_id and chat.is_deleted == false do %>
-                    <span phx-click="edit" phx-value-id={chat.id}>[編集]</span>
-                    | <span phx-click="delete" phx-value-id={chat.id}>[削除]</span>
-                <% end %>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4"><%= display_lines(chat.inner_text, chat.is_edited, chat.is_deleted, assigns) %></td>
-        </tr>
-    <% end %>
-</table>
-<br>
+        <%= if @mode == :show_all do %>
+            全件表示(<%= length(@chats) %>件)
+        <% else %>
+            "<%= @search_text %>"の検索結果(<%= length(@chats) %>件)
+        <% end %>
+        <br>
+    </div>
+    <div class="bg-stone-900 rounded-lg border-5 p-5 m-4">
+        <table>
+            <% chat_tuple = Enum.with_index(@chats, 1) %>
+            <%= for {chat, num} <- chat_tuple do %>
+                <tr class="border-solid border-2 border-current m-5">
+                <tr class="p-5">
+                    <td><%= num %>：</td>
+                    <td><%= chat.nickname %>&nbsp;</td>
+                    <td><%= format_date(chat.inserted_at) %></td>
+                    <td>
+                        <%= if chat.user_id == @user_id and chat.is_deleted == false do %>
+                            <span class="text-current hover:text-white hover:cursor-pointer" phx-click="edit" phx-value-id={chat.id}>[編集]</span>
+                            | <span class="text-current hover:text-white hover:cursor-pointer" phx-click="delete" phx-value-id={chat.id}>[削除]</span>
+                        <% end %>
+                    </td>
+                </tr>
+                    <td colspan="4"><%= display_lines(chat.inner_text, chat.is_edited, chat.is_deleted, assigns) %></td>
+                </tr>
 
-<h2 class="text-2xl">
-    <%= if @edit_text.id == 0 do %>
-        新規書き込み
-    <% else %>
-        書き込み(番号：<%= @edit_text.id %>)を編集
-        ｜<span phx-click="edit_cancel" phx-value-id={@edit_text.id}>[解除]</span>
-    <% end %>
-</h2>
-<.form let={f} for={@changeset} phx-submit="new_text">
-    <%= textarea f, :inner_text, value: @edit_text.text%>
-    <button type="submit">送信</button>
-</.form>
+            <% end %>
+        </table>
+    </div>
+    <br>
+
+    <div class="bg-stone-900 border-5 p-5 rounded-md ml-5">
+    <h2 class="text-lg">
+        <%= if @edit_text.id == 0 do %>
+            新規書き込み
+        <% else %>
+            <%= @edit_text.id %>：の書き込みを編集
+            <span phx-click="edit_cancel" phx-value-id={@edit_text.id} class="ml-4 border-solid border px-3 py-0.5 hover:text-white text-current hover:cursor-pointer rounded-3xl">取り消す</span>
+        <% end %>
+    </h2>
+        <.form let={f} for={@changeset} phx-submit="new_text">
+            <%= textarea f, :inner_text, value: @edit_text.text%>
+            <button class="ml-3 border-solid border px-3 py-0.5 rounded-md hover:text-white hover:cursor-pointer text-current" type="submit">送信</button>
+        </.form>
+    </div>
+</div>
