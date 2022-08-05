@@ -1,25 +1,25 @@
-<div class="container mx-auto p-10 bg-slate-100 rounded-md">
+<div class="container mx-auto p-10 bg-zinc-700 rounded-md">
 
-    <h1 class="text-5xl m-4"><span class="font-bold text-blue-400 ">Eligon</span>Chat</h1>
+    <h1 class="text-5xl m-4 text-current"><span class="font-bold text-blue-400 ">Eligon</span>Chat</h1>
 
-    <.form let={f} for={@changeset} phx-submit="search" class="m-5">
-        <div class="bg-slate-400 border-5 p-5 rounded-md">
-            <%= search_input f, :search_text, placeholder: "検索ワードを入力", size: 50 %>
-            <button type="submit" class="ml-3 border-solid border px-3 py-0.5 rounded-md hover:text-white text-current">検索</button>
-        </div>
-    </.form>
+        <.form let={f} for={@changeset} phx-submit="search" class="m-5">
+            <div class="bg-stone-900 border-5 p-5 rounded-md">
+                <%= search_input f, :search_text, placeholder: "検索ワードを入力", size: 50 %>
+                <button type="submit" class="ml-3 border-solid border px-3 py-0.5 rounded-md text-current hover:text-white">検索</button>
+            </div>
+        </.form>
     <div class="ml-5">
         <button phx-click="show_all">全件表示</button>
-        <br>
+            <br class="text-stone-500">
 
-        <%= if @mode == :show_all do %>
-            全件表示(<%= length(@chats) %>件)
-        <% else %>
-            "<%= @search_text %>"の検索結果(<%= length(@chats) %>件)
-        <% end %>
-        <br>
+                <%= if @mode == :show_all do %>
+                    全件表示(<%= length(@chats) %>件)
+                <% else %>
+                    "<%= @search_text %>"の検索結果(<%= length(@chats) %>件)
+                <% end %>
+            <br>
     </div>
-    <div class="bg-slate-300 rounded-lg border-5 p-5 m-4">
+    <div class="bg-stone-900 rounded-lg border-5 p-5 m-4">
         <table>
             <% chat_tuple = Enum.with_index(@chats, 1) %>
             <%= for {chat, num} <- chat_tuple do %>
@@ -43,7 +43,7 @@
     </div>
     <br>
 
-    <div class="bg-slate-400 border-5 p-5 rounded-md ml-5">
+    <div class="bg-stone-900 border-5 p-5 rounded-md ml-5">
     <h2 class="text-lg">
         <%= if @edit_text.id == 0 do %>
             新規書き込み
