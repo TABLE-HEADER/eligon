@@ -1,33 +1,36 @@
-<h1>学習</h1>
-
-<%= for {chapter, lessons} <- @textbook do %>
-    <h2><%= chapter.title %></h2>
-    <table>
-        <tr>
-            <th>講座番号</th>
-            <th>レッスン名</th>
-            <th>説明</th>
-            <th>完了</th>
-        </tr>
-        <%= for l <- lessons do %>
-            <tr>
-                <td><%= "#{chapter.index}-#{l.index}" %></td>
-                <td><%= link(l.lesson, to: URI.parse(l.link), target: "_blank") %></td>
-                <td><%= l.description %></td>
-                <td>
-                    <!--
-                    上のfor文では各lessonに対して一つずつ回している。
-                    その入ってきたlessonのidにマッチする@advancesの中のlesson_idだけをEnum.filterで取ってきている。
-                    あとはその取ってきたadvanceのis_readをそのままcheckedオプションに追加する。
-                    -->
-                    <.form let={f} for={@changeset} phx-change="check">
-                        <% [lesson_id_advance] = Enum.filter(@advances, fn advance -> advance.lesson_id == l.id end) %>
-                        <%= checkbox f, :is_read, checked: lesson_id_advance.is_read %>
-                        <%= hidden_input f, :lesson_id, value: l.id %>
-                        <%= hidden_input f, :user_id, value: lesson_id_advance.user_id %>
-                    </.form>
-                </td>
-            </tr>
-        <% end %>
-    </table>
-<% end %>
+<div class="container mx-auto m-10 p-10 bg-slate-200 rounded-lg">
+    <h1 class="text-5xl m-4"><span class="font-bold text-blue-400 ">Eligon</span>Study</h1>
+        <%= for {chapter, lessons} <- @textbook do %>
+        <div class="p-3 my-8 bg-slate-400 rounded-lg">
+            <h2 class="mb-5 text-2xl font-bold"><%= chapter.title %></h2>
+            <table>
+                <tr>
+                    <th>講座番号</th>
+                    <th>レッスン名</th>
+                    <th>説明</th>
+                    <th>完了</th>
+                </tr>
+                <%= for l <- lessons do %>
+                    <tr>
+                        <td class="py-2 "><%= "#{chapter.index}-#{l.index}" %></td>
+                        <td class="hover:text-violet-200 py-2 pl-5 underline underline-offset-1 font-bold"><%= link(l.lesson, to: URI.parse(l.link), target: "_blank") %></td>
+                        <td class="py-2 pl-5"><%= l.description %></td>
+                        <td class="py-2 pl-5 ">
+                            <!--
+                            上のfor文では各lessonに対して一つずつ回している。
+                            その入ってきたlessonのidにマッチする@advancesの中のlesson_idだけをEnum.filterで取ってきている。
+                            あとはその取ってきたadvanceのis_readをそのままcheckedオプションに追加する。
+                            -->
+                            <.form let={f} for={@changeset} phx-change="check">
+                                <% [lesson_id_advance] = Enum.filter(@advances, fn advance -> advance.lesson_id == l.id end) %>
+                                <%= checkbox f, :is_read, checked: lesson_id_advance.is_read %>
+                                <%= hidden_input f, :lesson_id, value: l.id %>
+                                <%= hidden_input f, :user_id, value: lesson_id_advance.user_id %>
+                            </.form>
+                        </td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+    <% end %>
+</div>
